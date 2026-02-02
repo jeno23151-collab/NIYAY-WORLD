@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<title>Sign Up | NIYAY WORLD</title>
+
+<style>
+body{
+    margin:0;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background: linear-gradient(135deg,#6a11cb,#2575fc,#b721ff);
+    font-family: Arial, sans-serif;
+}
+
+.container{
+    width: 380px;
+    background: #fff;
+    border-radius: 22px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.45);
+    padding: 35px;
+}
+
+h2{
+    text-align:center;
+    margin-bottom:25px;
+}
+
+input{
+    width:100%;
+    padding:12px;
+    margin:10px 0;
+    border-radius:12px;
+    border:1px solid #ccc;
+    font-size:15px;
+}
+
+button{
+    width:100%;
+    padding:12px;
+    margin-top:15px;
+    border:none;
+    border-radius:30px;
+    font-size:16px;
+    color:#fff;
+    cursor:pointer;
+    background: linear-gradient(135deg,#ff416c,#ff4b2b);
+}
+
+button:hover{
+    opacity:0.9;
+}
+
+.back{
+    text-align:center;
+    margin-top:18px;
+    font-size:14px;
+}
+
+.back a{
+    color:#2575fc;
+    text-decoration:none;
+    font-weight:bold;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+  <h2>สมัครสมาชิก</h2>
+
+  <input type="text" id="username" placeholder="ชื่อผู้ใช้">
+  <input type="email" id="email" placeholder="อีเมล">
+  <input type="password" id="password" placeholder="รหัสผ่าน">
+  <input type="password" id="confirm" placeholder="ยืนยันรหัสผ่าน">
+
+  <button onclick="signup()">สมัครสมาชิก</button>
+
+  <div class="back">
+    มีบัญชีแล้ว? <a href="login.html">เข้าสู่ระบบ</a>
+  </div>
+</div>
+
+<script>
+function signup(){
+    var user = document.getElementById("username").value;
+    var email = document.getElementById("email").value;
+    var pass = document.getElementById("password").value;
+    var confirm = document.getElementById("confirm").value;
+
+    if(user=="" || email=="" || pass=="" || confirm==""){
+        alert("กรุณากรอกข้อมูลให้ครบ");
+        return;
+    }
+
+    if(pass !== confirm){
+        alert("รหัสผ่านไม่ตรงกัน");
+        return;
+    }
+
+    alert("สมัครสมาชิกเรียบร้อยแล้ว");
+    window.location.href = "login.html";
+}
+</script>
+
+</body>
+</html>
