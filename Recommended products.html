@@ -1,0 +1,177 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Recommended products - NIYAY WORLD</title>
+<script type="text/javascript">
+
+function MM_swapImgRestore() { 
+  var i,x,a=document.MM_sr; for(i=0;a&&i<a.length&&(x=a[i])&&x.oSrc;i++) x.src=x.oSrc;
+}
+function MM_preloadImages() { 
+  var d=document; if(d.images){ if(!d.MM_p) d.MM_p=new Array();
+    var i,j=d.MM_p.length,a=MM_preloadImages.arguments; for(i=0; i<a.length; i++)
+    if (a[i].indexOf("#")!=0){ d.MM_p[j]=new Image; d.MM_p[j++].src=a[i];}}
+}
+function MM_findObj(n, d) { 
+  var p,i,x;  if(!d) d=document; if((p=n.indexOf("?"))>0&&parent.frames.length) {
+    d=parent.frames[n.substring(p+1)].document; n=n.substring(0,p);}
+  if(!(x=d[n])&&d.all) x=d.all[n]; for (i=0;!x&&i<d.forms.length;i++) x=d.forms[i][n];
+  for(i=0;!x&&d.layers&&i<d.layers.length;i++) x=MM_findObj(n,d.layers[i].document);
+  if(!x && d.getElementById) x=d.getElementById(n); return x;
+}
+function MM_swapImage() { 
+  var i,j=0,x,a=MM_swapImage.arguments; document.MM_sr=new Array; for(i=0;i<(a.length-2);i+=3)
+   if ((x=MM_findObj(a[i]))!=null){document.MM_sr[j++]=x; if(!x.oSrc) x.oSrc=x.src; x.src=a[i+2];}
+}
+let currentPrice = 0;
+let currentImg = ""; 
+
+function showDetail(title, desc, price, imgSrc) {
+    document.getElementById('mTitle').innerText = title;
+    document.getElementById('mDesc').innerText = desc;
+    document.getElementById('mPrice').innerText = price + " บาท";
+    currentPrice = price;
+    currentImg = imgSrc; 
+    document.getElementById('pModal').style.display = "block";
+}
+
+function addToCartAndGo(type) {
+    const title = document.getElementById('mTitle').innerText;
+    let cartItems = JSON.parse(localStorage.getItem('allCartData')) || [];
+    
+    cartItems.push({
+        name: title,
+        price: currentPrice,
+        img: currentImg
+    });
+    
+    localStorage.setItem('allCartData', JSON.stringify(cartItems));
+    
+    if(type === 'pay') {
+        window.location.href = 'Make payment.html';
+    } else {
+        alert('เพิ่ม ' + title + ' ลงตะกร้าแล้ว!');
+        window.location.href = 'shopping cart.html';
+    }
+}
+
+function closeModal() {
+    document.getElementById('pModal').style.display = "none";
+}
+</script>
+
+<style>
+body {
+    background: linear-gradient(135deg,#6a11cb,#2575fc,#b721ff);
+    background-attachment: fixed;
+    font-family: Arial, sans-serif;
+    margin: 0;
+}
+table { margin: auto; }
+td { padding: 10px; }
+td img {
+    border-radius: 20px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.35);
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+td img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 12px 28px rgba(0,0,0,0.5);
+}
+.product-modal {
+    display: none; position: fixed; z-index: 9999; left: 0; top: 0; width: 100%; height: 100%;
+    background-color: rgba(0,0,0,0.8); backdrop-filter: blur(5px);
+}
+.modal-box {
+    background: white; margin: 10% auto; padding: 30px; width: 400px; border-radius: 20px;
+    text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.5); animation: fadeIn 0.3s ease;
+}
+@keyframes fadeIn { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
+.modal-box h2 { color: #2575fc; margin-bottom: 10px; }
+.modal-box .price-tag { color: #ff4757; font-size: 24px; font-weight: bold; margin: 10px 0; }
+.modal-box p { color: #555; line-height: 1.6; text-align: left; }
+.btn-buy { background: #ff4757; color: white; padding: 12px 25px; border: none; border-radius: 30px; cursor: pointer; font-weight: bold; margin: 5px; transition: 0.2s; width: 45%; }
+.btn-cart { background: #2ed573; color: white; padding: 12px 25px; border: none; border-radius: 30px; cursor: pointer; font-weight: bold; margin: 5px; transition: 0.2s; width: 45%; }
+.close-btn { float: right; cursor: pointer; font-size: 24px; color: #999; }
+</style>
+</head>
+
+<body background="../../Green Natural Background Poster.png" onLoad="MM_preloadImages('../../All products 2.png','../../Search 2.png','../../Best 2.png','../../New 2.png','../../promotion 2.png','../../review  2.png','../../shopping cart  2.png','../../Make payment 2.png','../../profile 2.png','../HOME 2.png')">
+
+<header>
+  <table width="1400" border="0">
+    <tr><td><img src="../NIYAY WORLD (6).png" width="1400" height="200" alt=""/></td></tr>
+  </table>
+</header>
+
+<table width="1464" border="0">
+  <tr>
+    <td width="140"><a href="index.html" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('Image2','','../HOME 2.png',1)"><img src="../HOME 1.png" width="140" height="40" id="Image2"></a></td>
+    <td width="140"><a href="All products.html" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('Image3','','../All products 2.png',1)"><img src="../All products 1.png" width="140" height="40" id="Image3"></a></td>
+    <td width="140"><a href="Best selling products.html" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('Image4','','../Best 2.png',1)"><img src="../Best 1.png" width="140" height="40" id="Image4"></a></td>
+    <td width="140"><a href="New product.html" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('Image5','','../New 2.png',1)"><img src="../New  1.png" width="140" height="40" id="Image5"></a></td>
+    <td width="140"><a href="promotion.html" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('Image6','','../promotion 2.png',1)"><img src="../promotion  1.png" width="140" height="40" id="Image6"></a></td>
+    <td width="140"><a href="book review.html" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('Image7','','../review  2.png',1)"><img src="../_review  1.png" width="140" height="40" id="Image7"></a></td>
+    <td width="140"><a href="shopping cart.html" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('Image8','','../shopping cart  2.png',1)"><img src="../shopping cart 1.png" width="140" height="40" id="Image8"></a></td>
+    <td width="140"><a href="Make payment.html" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('Image9','','../Make payment 2.png',1)"><img src="../Make payment  1.png" width="140" height="40" id="Image9"></a></td>
+    <td width="140"><a href="profile.html" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('Image10','','../profile 2.png',1)"><img src="../profile  1.png" width="140" height="40" id="Image10"></a></td>
+    <td width="140"><a href="search for product.html" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('Image11','','../Search 2.png',1)"><img src="../Search1.png" width="140" height="40" id="Image11"></a></td>
+  </tr>
+</table>
+
+<table width="1400" border="0">
+  <tr><td align="center" style="font-size: 36px; color: #FFFFFF;">สินค้าแนะนำ</td></tr>
+</table>
+
+<table width="1400" border="0">
+  <tr>
+    <td><img src="../qqq.gif" width="280" height="440" onclick="showDetail('รักคุณมากกว่าเมื่อวาน', 'เรื่องราวความรักสุดซึ้ง...', 139, this.src)"/></td>
+    <td><img src="../www.gif" width="280" height="440" onclick="showDetail('เกิดใหม่ครั้งนี้จะไม่รักหมอ', 'เมื่อโอกาสที่สองมาถึง...', 129, this.src)"/></td>
+    <td><img src="../eee.gif" width="280" height="440" onclick="showDetail('ก็รู้อยู่เต็มหัวใจ', 'ความรักที่ซ่อนอยู่ในใจ...', 159, this.src)"/></td>
+    <td><img src="../rrr.gif" width="280" height="440" onclick="showDetail('ต้าวแสบของนางร้ายขอหยุมหัวปะป๊า', 'ความป่วนของต้าวแสบ...', 159, this.src)"/></td>
+  </tr>
+  <tr style="color: white; text-align: center;">
+    <td>รักคุณมากกว่าเมื่อวาน<br>139 บาท</td>
+    <td>เกิดใหม่ครั้งนี้จะไม่รักหมอ<br>129 บาท</td>
+    <td>ก็รู้อยู่เต็มหัวใจ<br>159 บาท</td>
+    <td>ต้าวแสบของนางร้ายฯ<br>159 บาท</td>
+  </tr>
+</table>
+
+<table width="1400" border="0">
+  <tr>
+    <td><img src="../ttt.gif" width="312" height="452" onclick="showDetail('เลขานางร้ายของท่านประธานมาเฟีย', 'เลขาแสนสวยกับประธานจอมโหด...', 147, this.src)"/></td>
+    <td><img src="../yyy.gif" width="312" height="441" onclick="showDetail('ตำแหน่งมะมี๊ลูกสาวผู้กองปานตะวัน...', 'จุ๋มจิ๋มจะพิชิตใจคุณพ่อ...', 169, this.src)"/></td>
+    <td><img src="../uuu.gif" width="312" height="446" onclick="showDetail('Saturday กรุ่นรักระเบียงไม้', 'ความรักในวันเสาร์ที่แสนอบอุ่น...', 180, this.src)"/></td>
+    <td><img src="../iii.gif" width="312" height="441" onclick="showDetail('หวานใจจำเป็น', 'เมื่อความรักเกิดขึ้นโดยไม่ตั้งใจ...', 149, this.src)"/></td>
+  </tr>
+  <tr style="color: white; text-align: center;">
+    <td>เลขานางร้ายฯ<br>147 บาท</td>
+    <td>ตำแหน่งมะมี๊ฯ<br>169 บาท</td>
+    <td>Saturday กรุ่นรักฯ<br>180 บาท</td>
+    <td>หวานใจจำเป็น<br>149 บาท</td>
+  </tr>
+</table>
+
+<div id="pModal" class="product-modal">
+  <div class="modal-box">
+    <span class="close-btn" onclick="closeModal()">&times;</span>
+    <h2 id="mTitle">ชื่อสินค้า</h2>
+    <div id="mPrice" class="price-tag">0 บาท</div>
+    <p id="mDesc">คำอธิบายสินค้า...</p>
+    <hr style="margin: 20px 0; border: 0; border-top: 1px solid #eee;">
+    <button class="btn-buy" onclick="addToCartAndGo('pay')">BUY NOW</button>
+    <button class="btn-cart" onclick="addToCartAndGo('cart')">ADD TO CART</button>
+  </div>
+</div>
+
+<script>
+window.onclick = function(event) {
+    if (event.target == document.getElementById('pModal')) { closeModal(); }
+}
+</script>
+
+</body>
+</html>
