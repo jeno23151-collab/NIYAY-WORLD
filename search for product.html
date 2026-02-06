@@ -1,0 +1,228 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Search for products - NIYAY WORLD</title>
+
+<script type="text/javascript">
+var selectedProduct = {}; 
+
+function popOut(img, title, price) {
+    selectedProduct = { img: img, name: title, price: parseFloat(price) }; 
+    document.getElementById('modalImg').src = img;
+    document.getElementById('modalTitle').innerText = title;
+    document.getElementById('modalPrice').innerText = "ราคา: " + price + " บาท";
+    document.getElementById('modalOverlay').style.display = "block";
+}
+function addToCartAndGo(type) {
+    let cartItems = JSON.parse(localStorage.getItem('allCartData')) || [];
+    cartItems.push(selectedProduct);
+    localStorage.setItem('allCartData', JSON.stringify(cartItems));
+    
+    if(type === 'buy') {
+        window.location.href = "Make payment.html";
+    } else {
+        alert('เพิ่ม ' + selectedProduct.name + ' ลงตะกร้าแล้ว!');
+        window.location.href = "shopping cart.html";
+    }
+}
+function searchPet(){
+  var keyword = document.getElementById("searchInput").value.toLowerCase();
+  var items = document.getElementsByClassName("pet-item");
+  for(var i = 0; i < items.length; i++){
+    var name = items[i].getElementsByClassName("pet-name")[0];
+    if(name) {
+      items[i].style.display = (name.innerText.toLowerCase().indexOf(keyword) > -1) ? "" : "none";
+    }
+  }
+}
+function MM_preloadImages() { //v3.0
+  var d=document; if(d.images){ if(!d.MM_p) d.MM_p=new Array();
+    var i,j=d.MM_p.length,a=MM_preloadImages.arguments; for(i=0; i<a.length; i++)
+    if (a[i].indexOf("#")!=0){ d.MM_p[j]=new Image; d.MM_p[j++].src=a[i];}}
+}
+function MM_swapImgRestore() { //v3.0
+  var i,x,a=document.MM_sr; for(i=0;a&&i<a.length&&(x=a[i])&&x.oSrc;i++) x.src=x.oSrc;
+}
+function MM_findObj(n, d) { //v4.01
+  var p,i,x;  if(!d) d=document; if((p=n.indexOf("?"))>0&&parent.frames.length) {
+    d=parent.frames[n.substring(p+1)].document; n=n.substring(0,p);}
+  if(!(x=d[n])&&d.all) x=d.all[n]; for (i=0;!x&&i<d.forms.length;i++) x=d.forms[i][n];
+  for(i=0;!x&&d.layers&&i<d.layers.length;i++) x=MM_findObj(n,d.layers[i].document);
+  if(!x && d.getElementById) x=d.getElementById(n); return x;
+}
+
+function MM_swapImage() { //v3.0
+  var i,j=0,x,a=MM_swapImage.arguments; document.MM_sr=new Array; for(i=0;i<(a.length-2);i+=3)
+   if ((x=MM_findObj(a[i]))!=null){document.MM_sr[j++]=x; if(!x.oSrc) x.oSrc=x.src; x.src=a[i+2];}
+}
+</script>
+
+<style>
+body {
+    background: linear-gradient(135deg,#6a11cb,#2575fc,#b721ff);
+    background-attachment: fixed;
+    font-family: Arial, sans-serif;
+    margin: 0;
+}
+table { margin: auto; }
+
+td img {
+    border-radius: 20px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.35);
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+td img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 12px 28px rgba(0,0,0,0.5);
+}
+
+.search-container {
+    background: rgba(255, 255, 255, 0.15);
+    padding: 30px;
+    border-radius: 30px;
+    width: 70%;
+    margin: 30px auto;
+    text-align: center;
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255,255,255,0.3);
+}
+#searchInput {
+    width: 80%;
+    padding: 15px 30px;
+    font-size: 18px;
+    border-radius: 50px;
+    border: none;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+    outline: none;
+    text-align: center;
+}
+
+.pet-table { width: 95%; margin: auto; border-collapse: separate; border-spacing: 20px; }
+
+.pet-item {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 20px;
+    border-radius: 25px;
+    transition: 0.3s;
+}
+
+.pet-item p { 
+    color: #FFFFFF; 
+    font-weight: bold; 
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5); 
+    margin: 10px 0; 
+}
+.pet-name { font-size: 20px; }
+
+/* Modal Design */
+.modal-overlay {
+    display: none; position: fixed; z-index: 10000; left: 0; top: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.85); backdrop-filter: blur(8px);
+}
+.modal-box {
+    background: white; width: 380px; margin: 5% auto; padding: 30px; border-radius: 35px;
+    text-align: center; position: relative;
+    box-shadow: 0 25px 50px rgba(0,0,0,0.6);
+    animation: slideIn 0.3s ease;
+}
+@keyframes slideIn { from { transform: translateY(-30px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+.close-btn { position: absolute; right: 25px; top: 15px; font-size: 35px; cursor: pointer; color: #999; }
+
+.btn-buy-modal { 
+    padding: 14px; background: #ff4757; color: white; border: none; border-radius: 30px; 
+    cursor: pointer; font-weight: bold; font-size: 16px; margin: 8px 0; width: 90%;
+}
+.btn-cart-modal { 
+    padding: 14px; background: #2ed573; color: white; border: none; border-radius: 30px; 
+    cursor: pointer; font-weight: bold; font-size: 16px; margin: 8px 0; width: 90%;
+}
+.btn-buy-modal:hover, .btn-cart-modal:hover { transform: scale(1.05); filter: brightness(1.1); transition: 0.2s; }
+</style>
+</head>
+
+<body onLoad="MM_preloadImages('HOME 2.png','All products 2.png','Best 2.png','New 2.png','promotion 2.png','review  2.png','Recommended  2.png','shopping cart  2.png','Make payment 2.png','profile 2.png')">
+
+<header>
+  <table width="1400" border="0">
+    <tr><td><img src="NIYAY WORLD (3).png" width="1400" height="200" alt="Header"></td></tr>
+  </table>
+</header>
+<table width="1400" border="0">
+  <tbody>
+    <tr>
+      <td><a href="index.html" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('Image9','','HOME 2.png',1)"><img src="HOME 1.png" alt="" width="140" height="40" id="Image9"></a></td>
+      <td><a href="All products.html" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('Image10','','All products 2.png',1)"><img src="All products 1.png" alt="" width="140" height="40" id="Image10"></a></td>
+      <td><a href="Best selling products.html" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('Image11','','Best 2.png',1)"><img src="Best 1.png" alt="" width="140" height="40" id="Image11"></a></td>
+      <td><a href="New product.html" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('Image12','','New 2.png',1)"><img src="New  1.png" alt="" width="140" height="40" id="Image12"></a></td>
+      <td><a href="promotion.html" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('Image13','','promotion 2.png',1)"><img src="promotion  1.png" alt="" width="140" height="40" id="Image13"></a></td>
+      <td><a href="book review.html" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('Image14','','review  2.png',1)"><img src="review  1.png" alt="" width="140" height="40" id="Image14"></a></td>
+      <td><a href="Recommended products.html" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('Image15','','Recommended  2.png',1)"><img src="Recommended 1.png" alt="" width="140" height="40" id="Image15"></a></td>
+      <td><a href="shopping cart.html" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('Image16','','shopping cart  2.png',1)"><img src="shopping cart 1.png" alt="" width="140" height="40" id="Image16"></a></td>
+      <td><a href="Make payment.html" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('Image17','','Make payment 2.png',1)"><img src="Make payment  1.png" alt="" width="140" height="40" id="Image17"></a></td>
+      <td><a href="profile.html" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('Image18','','profile 2.png',1)"><img src="profile  1.png" alt="" width="140" height="40" id="Image18"></a></td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+
+<div class="search-container">
+  <input type="text" id="searchInput" placeholder="พิมพ์ชื่อนิยายเพื่อค้นหา..." onkeyup="searchPet()">
+</div>
+
+<table class="pet-table" border="0">
+  <tr>
+    <td align="center" class="pet-item">
+      <img src="น1.jpg" width="250" height="350" onclick="popOut('น1.jpg', 'มุมมองนักอ่านพระเจ้า', '250')">
+      <p class="pet-name">มุมมองนักอ่านพระเจ้า</p><p>ราคา 250 บาท</p>
+    </td>
+    <td align="center" class="pet-item">
+      <img src="book_detail_large.gif" width="250" height="350" onclick="popOut('book_detail_large.gif', 'ปริศนามหาเวทย์', '200')">
+      <p class="pet-name">ปริศนามหาเวทย์</p><p>ราคา 200 บาท</p>
+    </td>
+    <td align="center" class="pet-item">
+      <img src="harry.jpg" width="250" height="350" onclick="popOut('harry.jpg', 'แฮรี่ พอตเตอร์', '275')">
+      <p class="pet-name">แฮรี่ พอตเตอร์</p><p>ราคา 275 บาท</p>
+    </td>
+  </tr>
+  <tr>
+    <td align="center" class="pet-item">
+      <img src="nXEFOIklS2GxToln8qUpn556.jpeg" width="250" height="350" onclick="popOut('nXEFOIklS2GxToln8qUpn556.jpeg', 'ราชันเร้นลับ', '350')">
+      <p class="pet-name">ราชันเร้นลับ</p><p>ราคา 350 บาท</p>
+    </td>
+    <td align="center" class="pet-item">
+      <img src="นิยายมาใหม่1.gif" width="250" height="350" onclick="popOut('นิยายมาใหม่1.gif', 'ข้านะหรือคือนางร้ายที่ต้องตาย', '179')">
+      <p class="pet-name">ข้านะหรือคือนางร้ายที่ต้องตาย</p><p>ราคา 179 บาท</p>
+    </td>
+    <td align="center" class="pet-item">
+      <img src="นิยายมาใหม่4.gif" width="250" height="350" onclick="popOut('นิยายมาใหม่4.gif', 'เพียง (พอ) รัก', '180')">
+      <p class="pet-name">เพียง (พอ) รัก</p><p>ราคา 180 บาท</p>
+    </td>
+  </tr>
+</table>
+
+<div id="modalOverlay" class="modal-overlay" onclick="this.style.display='none'">
+    <div class="modal-box" onclick="event.stopPropagation()">
+        <span class="close-btn" onclick="document.getElementById('modalOverlay').style.display='none'">&times;</span>
+        <img id="modalImg" src="" style="width:220px; height:310px; border-radius:15px; object-fit: cover; box-shadow: 0 10px 20px rgba(0,0,0,0.2);">
+        <h2 id="modalTitle" style="color:#333; margin:15px 0; font-size: 24px;"></h2>
+        <p id="modalPrice" style="color:#ff3366; font-size:24px; font-weight:bold; margin-bottom: 20px;"></p>
+        
+        <button class="btn-buy-modal" onclick="addToCartAndGo('buy')">สั่งซื้อทันที (Buy Now)</button>
+        <button class="btn-cart-modal" onclick="addToCartAndGo('cart')">ใส่ตะกร้าสินค้า (Add to Cart)</button>
+    </div>
+</div>
+
+<script>
+window.onkeydown = function(event) {
+    if (event.keyCode == 27) {
+        document.getElementById('modalOverlay').style.display = "none";
+    }
+};
+</script>
+
+</body>
+</html>
