@@ -1,0 +1,171 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Niyay world - Home</title>
+
+<script type="text/javascript">
+let currentProduct = {}; 
+
+function showDetail(title, price, imgSrc, desc) {
+    currentProduct = { name: title, price: parseFloat(price), img: imgSrc };
+    document.getElementById('mTitle').innerText = title;
+    document.getElementById('mPrice').innerText = price + " บาท";
+    document.getElementById('mDesc').innerText = desc || "รายละเอียดนิยายเรื่อง " + title;
+    document.getElementById('pModal').style.display = "block";
+}
+
+function closeModal() {
+    document.getElementById('pModal').style.display = "none";
+}
+
+function addToCartAndGo(type) {
+    let cart = JSON.parse(localStorage.getItem('allCartData')) || [];
+    cart.push(currentProduct);
+    localStorage.setItem('allCartData', JSON.stringify(cart));
+    
+    if(type === 'pay') {
+        window.location.href = 'Make payment.html';
+    } else {
+        alert('เพิ่ม ' + currentProduct.name + ' ลงตะกร้าแล้ว!');
+        window.location.href = 'shopping cart.html';
+    }
+}
+function MM_preloadImages() { //v3.0
+  var d=document; if(d.images){ if(!d.MM_p) d.MM_p=new Array();
+    var i,j=d.MM_p.length,a=MM_preloadImages.arguments; for(i=0; i<a.length; i++)
+    if (a[i].indexOf("#")!=0){ d.MM_p[j]=new Image; d.MM_p[j++].src=a[i];}}
+}
+function MM_swapImgRestore() { //v3.0
+  var i,x,a=document.MM_sr; for(i=0;a&&i<a.length&&(x=a[i])&&x.oSrc;i++) x.src=x.oSrc;
+}
+function MM_findObj(n, d) { //v4.01
+  var p,i,x;  if(!d) d=document; if((p=n.indexOf("?"))>0&&parent.frames.length) {
+    d=parent.frames[n.substring(p+1)].document; n=n.substring(0,p);}
+  if(!(x=d[n])&&d.all) x=d.all[n]; for (i=0;!x&&i<d.forms.length;i++) x=d.forms[i][n];
+  for(i=0;!x&&d.layers&&i<d.layers.length;i++) x=MM_findObj(n,d.layers[i].document);
+  if(!x && d.getElementById) x=d.getElementById(n); return x;
+}
+
+function MM_swapImage() { //v3.0
+  var i,j=0,x,a=MM_swapImage.arguments; document.MM_sr=new Array; for(i=0;i<(a.length-2);i+=3)
+   if ((x=MM_findObj(a[i]))!=null){document.MM_sr[j++]=x; if(!x.oSrc) x.oSrc=x.src; x.src=a[i+2];}
+}
+</script>
+
+<style>
+body {
+    background: linear-gradient(135deg,#6a11cb,#2575fc,#b721ff);
+    background-attachment: fixed;
+    font-family: Arial, sans-serif;
+    margin: 0; padding: 0;
+}
+table { margin: auto; border-collapse: collapse; }
+td { padding: 10px; vertical-align: top; }
+
+td img {
+    border-radius: 20px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.35);
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+td img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 12px 28px rgba(0,0,0,0.5);
+    text-align: center;
+}
+
+.product-modal {
+    display: none; position: fixed; z-index: 9999; left: 0; top: 0; width: 100%; height: 100%;
+    background-color: rgba(0,0,0,0.85); backdrop-filter: blur(8px);
+}
+.modal-box {
+    background: white; margin: 8% auto; padding: 30px; width: 420px; border-radius: 25px;
+    text-align: center; box-shadow: 0 15px 40px rgba(0,0,0,0.5); position: relative;
+    animation: zoomIn 0.3s ease;
+}
+@keyframes zoomIn { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+
+.modal-box h2 { color: #2575fc; margin: 0 0 10px 0; }
+.price-tag { color: #ff4757; font-size: 26px; font-weight: bold; margin-bottom: 15px; }
+.close-btn { position: absolute; right: 20px; top: 15px; cursor: pointer; font-size: 28px; color: #ccc; }
+.close-btn:hover { color: #333; }
+
+.btn-buy { background: #ff4757; color: white; padding: 12px 25px; border: none; border-radius: 30px; cursor: pointer; font-weight: bold; margin: 5px; width: 45%; }
+.btn-cart { background: #2ed573; color: white; padding: 12px 25px; border: none; border-radius: 30px; cursor: pointer; font-weight: bold; margin: 5px; width: 45%; }
+</style>
+</head>
+
+<body onLoad="MM_preloadImages('All products 2.png','Best 2.png','New 2.png','promotion 2.png','review  2.png','Recommended  2.png','shopping cart  2.png','Make payment 2.png','profile 2.png','Search 2.png')">
+
+<table width="1400" border="0">
+<tr>
+  <td><img src="NIYAY WORLD.png" width="1400" height="200" alt=""/></td></tr>
+    <table width="1400" border="0">
+      <tbody>
+        <tr>
+          <td><a href="All products.html" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('Image7','','All products 2.png',1)"><img src="All products 1.png" alt="" width="140" height="40" id="Image7"></a></td>
+          <td><a href="Best selling products.html" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('Image8','','Best 2.png',1)"><img src="Best 1.png" alt="" width="140" height="40" id="Image8"></a></td>
+          <td><a href="New product.html" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('Image9','','New 2.png',1)"><img src="New  1.png" alt="" width="140" height="40" id="Image9"></a></td>
+          <td><a href="promotion.html" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('Image10','','promotion 2.png',1)"><img src="promotion  1.png" alt="" width="140" height="40" id="Image10"></a></td>
+          <td><a href="book review.html" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('Image11','','review  2.png',1)"></a><a href="book review.html" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('Image17','','review  2.png',1)"><img src="review  1.png" alt="" width="140" height="40" id="Image17"></a></td>
+          <td><a href="Recommended products.html" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('Image12','','Recommended  2.png',1)"><img src="Recommended 1.png" alt="" width="140" height="40" id="Image12"></a></td>
+          <td><a href="shopping cart.html" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('Image13','','shopping cart  2.png',1)"><img src="shopping cart 1.png" alt="" width="140" height="40" id="Image13"></a></td>
+          <td><a href="Make payment.html" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('Image14','','Make payment 2.png',1)"><img src="Make payment  1.png" alt="" width="140" height="40" id="Image14"></a></td>
+          <td><a href="profile.html" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('Image15','','profile 2.png',1)"><img src="profile  1.png" alt="" width="140" height="40" id="Image15"></a></td>
+          <td><a href="search for product.html" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('Image16','','Search 2.png',1)"><img src="Search1.png" alt="" width="140" height="40" id="Image16"></a></td>
+        </tr>
+      </tbody>
+  </table></td></tr>
+</table>
+
+
+
+<table width="1464" border="0">
+  <tr>
+    <td align="center"><img src="น1.jpg" width="280" height="440" onclick="showDetail('มุมมองนักอ่านพระเจ้า', '250', this.src, 'เรื่องราวของชายผู้รู้จุดจบของนิยายที่กลายเป็นเรื่องจริง')"></td>
+    <td align="center"><img src="book_detail_large.gif" width="280" height="440" onclick="showDetail('ปริศนามหาเวทย์', '200', this.src, 'การต่อสู้ในโลกเวทมนตร์ที่สุดแสนจะอันตราย')"></td>
+    <td align="center"><img src="harry.jpg" width="280" height="440" onclick="showDetail('แฮรี่ พอตเตอร์', '275', this.src, 'วรรณกรรมเยาวชนระดับโลกที่ทุกคนต้องอ่าน')"></td>
+    <td align="center"><img src="nXEFOIklS2GxToln8qUpn556.jpeg" width="280" height="440" onclick="showDetail('ราชันเร้นลับ', '350', this.src, 'ความลึกลับเหนือจินตนาการในยุควิคตอเรีย')"></td>
+  </tr>
+</table>
+
+<table width="1464" border="0">
+  <tr style="color: #FFFFFF; text-align: center;">
+    <td width="366">มุมมองนักอ่านพระเจ้า<br>ราคา 250</td>
+    <td width="366">ปริศนามหาเวทย์<br>ราคา 200</td>
+    <td width="366">แฮรี่ พอตเตอร์<br>ราคา 275</td>
+    <td width="366">ราชันเร้นลับ<br>ราคา 350</td>
+  </tr>
+</table>
+<table width="1400" border="0">
+  <tbody>
+    <tr>
+      <td align="center"><img src="ช่องทางตืดต่อ.png" width="1000" height="250" alt=""/></td>
+    </tr>
+  </tbody>
+</table>
+
+<div id="pModal" class="product-modal">
+  <div class="modal-box">
+    <span class="close-btn" onclick="closeModal()">&times;</span>
+    <h2 id="mTitle">ชื่อสินค้า</h2>
+    <div id="mPrice" class="price-tag">0 บาท</div>
+    <p id="mDesc">คำอธิบายสินค้า...</p>
+    <hr style="margin: 20px 0; border: 0; border-top: 1px solid #eee;">
+    <button class="btn-buy" onclick="addToCartAndGo('pay')">BUY NOW</button>
+    <button class="btn-cart" onclick="addToCartAndGo('cart')">ADD TO CART</button>
+  </div>
+</div>
+
+<script>
+window.onclick = function(event) {
+    let modal = document.getElementById('pModal');
+    if (event.target == modal) { closeModal(); }
+}
+</script>
+
+</body>
+</html>
